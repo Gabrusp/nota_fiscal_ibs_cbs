@@ -67,9 +67,9 @@ let currentHighlightedIndex = -1;
 let filteredResults = [];
 
 function initializeAutocomplete() {
-  const input = document.getElementById('codigo-tributario-principal');
+  const input = document.getElementById('codigo-tributario');
   const dropdown = document.getElementById('codigo-tributario-dropdown');
-  const descriptionDiv = document.getElementById('codigo-tributario-principal-desc');
+  const descriptionDiv = document.getElementById('codigo-tributario-desc');
 
   if (!input || !dropdown) return;
 
