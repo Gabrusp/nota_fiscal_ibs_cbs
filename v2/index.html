@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IBS e CBS - Nota Fiscal de Serviços Eletrônica</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>NOTA FISCAL DE SERVIÇOS ELETRONICA - NFS-E</h1>
+      <p>Imposto e contribuição sobre bens e serviços (IBS e CBS)</p>
+    </header>
+
+    <form id="nfse-form" class="nfse-form">
+
+      <!-- Seção Fornecedor -->
+      <section class="form-section card">
+        <div class="form-section__header">
+          <h2>👤 Fornecedor</h2>
+        </div>
+        <div class="form-section__body card__body">
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="fornecedor-cpf-cnpj" class="form-label">CPF/CNPJ</label>
+              <input type="text" id="fornecedor-cpf-cnpj" class="form-control2" placeholder="000.000.000-00 ou 00.000.000/0000-00" disabled>
+            </div>
+
+            <div class="form-group">
+              <label for="fornecedor-nome" class="form-label">Nome / Razão Social</label>
+              <input type="text" id="fornecedor-nome" class="form-control2" disabled>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Tomador -->
+      <section class="form-section card" id="secao-tomador">
+        <div class="form-section__header">
+          <h2>👤 Tomador (informações complementares)
+            <button type="button" class="toggle-section" data-target="tomador-body">+</button>
+          </h2>
+        </div>
+        <div class="form-section__body card__body collapsed" id="tomador-body">
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="tomador-nif" class="form-label">NIF</label>
+              <input type="text" id="tomador-nif" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="tomador-motivo-nif" class="form-label">Motivo para não informação do NIF</label>
+              <select id="tomador-motivo-nif" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="nao-informado">Não informado na nota de origem</option>
+                <option value="dispensado">Dispensado do NIF</option>
+                <option value="nao-exigencia">Não exigência do NIF</option>
+              </select>
+            </div>
+          </div>
+
+          <h3 class="subsection-title">Informações de Endereço no Exterior</h3>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="tomador-pais" class="form-label">País</label>
+              <input type="text" id="tomador-pais" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="tomador-codigo-postal" class="form-label">Código de Endereçamento Postal</label>
+              <input type="text" id="tomador-codigo-postal" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="tomador-cidade" class="form-label">Cidade</label>
+              <input type="text" id="tomador-cidade" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="tomador-estado" class="form-label">Estado / Província / Região</label>
+              <input type="text" id="tomador-estado" class="form-control">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Destinatário -->
+      <section class="form-section card">
+        <div class="form-section__header">
+          <h2>👤 Destinatário</h2>
+        </div>
+        <div class="form-section__body card__body">
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="check-dest-tom">
+              Destinatário igual ao tomador
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="destinatario-cpf-cnpj" class="form-label">CPF/CNPJ</label>
+            <input type="text" id="destinatario-cpf-cnpj" class="form-control" placeholder="000.000.000-00 ou 00.000.000/0000-00">
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="destinatario-nif" class="form-label">NIF</label>
+              <input type="text" id="destinatario-nif" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="destinatario-motivo-nif" class="form-label">Motivo para não informação do NIF</label>
+              <select id="destinatario-motivo-nif" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="nao-informado">Não informado na nota de origem</option>
+                <option value="dispensado">Dispensado do NIF</option>
+                <option value="nao-exigencia">Não exigência do NIF</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="destinatario-nome" class="form-label">Nome / Razão Social</label>
+            <input type="text" id="destinatario-nome" class="form-control">
+          </div>
+
+          <div class="form-grid form-grid-4">
+            <div class="form-group span-2">
+              <label for="destinatario-endereco" class="form-label">Endereço</label>
+              <input type="text" id="destinatario-endereco" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="destinatario-numero" class="form-label">Número</label>
+              <input type="text" id="destinatario-numero" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="destinatario-complemento" class="form-label">Complemento</label>
+              <input type="text" id="destinatario-complemento" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="destinatario-bairro" class="form-label">Bairro</label>
+              <input type="text" id="destinatario-bairro" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="destinatario-email" class="form-label">E-mail</label>
+              <input type="email" id="destinatario-email" class="form-control">
+            </div>
+          </div>
+
+          <h3 class="subsection-title">Informações de Endereço Nacional</h3>
+          <div class="form-group">
+            <label for="destinatario-cep" class="form-label">CEP do Domícílio Principal</label>
+            <input type="text" id="destinatario-cep" class="form-control" placeholder="00000-000">
+            <div class="helper-text">Digite o CEP para ver município/UF</div>
+          </div>
+
+          <h3 class="subsection-title">Informações de Endereço no Exterior</h3>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="destinatario-pais" class="form-label">País</label>
+              <input type="text" id="destinatario-pais" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="destinatario-codigo-postal" class="form-label">Código de Endereçamento Postal</label>
+              <input type="text" id="destinatario-codigo-postal" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="destinatario-cidade" class="form-label">Cidade</label>
+              <input type="text" id="destinatario-cidade" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="destinatario-estado" class="form-label">Estado / Província / Região</label>
+              <input type="text" id="destinatario-estado" class="form-control">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Adquirente -->
+      <section class="form-section card">
+        <div class="form-section__header">
+          <h2>👤 Adquirente</h2>
+        </div>
+        <div class="form-section__body card__body">
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="check-adq-tom">
+                Adquirente igual ao tomador
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="check-adq-dest">
+                Adquirente igual ao destinatário
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="adquirente-cpf-cnpj" class="form-label">CPF/CNPJ</label>
+            <input type="text" id="adquirente-cpf-cnpj" class="form-control" placeholder="000.000.000-00 ou 00.000.000/0000-00">
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="adquirente-nif" class="form-label">NIF</label>
+              <input type="text" id="adquirente-nif" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="adquirente-motivo-nif" class="form-label">Motivo para não informação do NIF</label>
+              <select id="adquirente-motivo-nif" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="nao-informado">Não informado na nota de origem</option>
+                <option value="dispensado">Dispensado do NIF</option>
+                <option value="nao-exigencia">Não exigência do NIF</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="adquirente-nome" class="form-label">Nome / Razão Social</label>
+            <input type="text" id="adquirente-nome" class="form-control">
+          </div>
+
+          <div class="form-grid form-grid-4">
+            <div class="form-group span-2">
+              <label for="adquirente-endereco" class="form-label">Endereço</label>
+              <input type="text" id="adquirente-endereco" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="adquirente-numero" class="form-label">Número</label>
+              <input type="text" id="adquirente-numero" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="adquirente-complemento" class="form-label">Complemento</label>
+              <input type="text" id="adquirente-complemento" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="adquirente-bairro" class="form-label">Bairro</label>
+              <input type="text" id="adquirente-bairro" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="adquirente-email" class="form-label">E-mail</label>
+              <input type="email" id="adquirente-email" class="form-control">
+            </div>
+          </div>
+
+          <h3 class="subsection-title">Informações de Endereço Nacional</h3>
+          <div class="form-group">
+            <label for="adquirente-cep" class="form-label">CEP do Domícílio Principal</label>
+            <input type="text" id="adquirente-cep" class="form-control" placeholder="00000-000">
+            <div class="helper-text">Digite o CEP para ver município/UF</div>
+          </div>
+
+          <h3 class="subsection-title">Informações de Endereço no Exterior</h3>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="adquirente-pais" class="form-label">País</label>
+              <input type="text" id="adquirente-pais" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="adquirente-codigo-postal" class="form-label">Código de Endereçamento Postal</label>
+              <input type="text" id="adquirente-codigo-postal" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="adquirente-cidade" class="form-label">Cidade</label>
+              <input type="text" id="adquirente-cidade" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="adquirente-estado" class="form-label">Estado / Província / Região</label>
+              <input type="text" id="adquirente-estado" class="form-control">
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Seção imóvel / obra -->
+      <section class="form-section card" id="secao-imovel-obra">
+        <div class="form-section__header">
+          <h2>🏠 Imóvel / Obra
+            <button type="button" class="toggle-section" data-target="imovel-obra-body">+</button>
+          </h2>
+        </div>
+        <div class="form-section__body card__body collapsed" id="imovel-obra-body">
+          <div class="form-group">
+            <label for="cib-imovel-obra" class="form-label">Cadastro Imobiliário Brasileiro (CIB)</label>
+            <input type="text" id="cib-imovel-obra" class="form-control">
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="IIF" class="form-label">Inscrição Imobiliária Fiscal</label>
+              <input type="text" id="IIF" class="form-control">
+            </div>
+
+           <div class="form-group">
+              <label for="cod-obra" class="form-label">Código da Obra</label>
+              <input type="text" id="cod-obra" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-4">
+            <div class="form-group span-2">
+              <label for="imovel-obra-endereco" class="form-label">Endereço</label>
+              <input type="text" id="imovel-obra-endereco" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="imovel-obra-numero" class="form-label">Número</label>
+              <input type="text" id="imovel-obra-numero" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="imovel-obra-complemento" class="form-label">Complemento</label>
+              <input type="text" id="imovel-obra-complemento" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="imovel-obra-bairro" class="form-label">Bairro</label>
+              <input type="text" id="imovel-obra-bairro" class="form-control">
+            </div>
+          </div>
+
+          <h3 class="subsection-title">Informações de Endereço Nacional</h3>
+          <div class="form-group">
+            <label for="imovel-obra-cep" class="form-label">CEP do Domícílio Principal</label>
+            <input type="text" id="imovel-obra-cep" class="form-control" placeholder="00000-000">
+            <div class="helper-text">Digite o CEP para ver município/UF</div>
+          </div>
+
+          <h3 class="subsection-title">Informações de Endereço no Exterior</h3>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="imovel-obra-pais" class="form-label">País</label>
+              <input type="text" id="imovel-obra-pais" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="imovel-obra-codigo-postal" class="form-label">Código de Endereçamento Postal</label>
+              <input type="text" id="imovel-obra-codigo-postal" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="imovel-obra-cidade" class="form-label">Cidade</label>
+              <input type="text" id="imovel-obra-cidade" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="imovel-obra-estado" class="form-label">Estado / Província / Região</label>
+              <input type="text" id="imovel-obra-estado" class="form-control">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Serviço Prestado -->
+      <section class="form-section card">
+        <div class="form-section__header">
+          <h2>🔧 Serviço Prestado</h2>
+        </div>
+        <div class="form-section__body card__body">
+            <div class="form-group">
+              <label for="finalidade" class="form-label">Finalidade da Emissão da Nota</label>
+              <select id="finalidade" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="presencial">NFS-e regular</option>
+                <option value="nao-presencial">NFS-e de crédito</option>
+                <option value="nao-presencial">NFS-e de débito</option>
+              </select>
+            </div>
+          
+            <div class="form-group">
+              <label for="codigo-tributario" class="form-label">Código de Classificação Tributária</label>
+              <div class="autocomplete-container">
+                <input type="text" id="codigo-tributario" class="form-control" placeholder="Digite o código ou descrição para filtrar" wfd-id="id17">
+                <div class="autocomplete-dropdown" id="codigo-tributario-dropdown">
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">000002</div>
+                    <div class="autocomplete-description">Exploração de via, observado o art. 11 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">000003</div>
+                    <div class="autocomplete-description">Regime automotivo - projetos incentivados, observado o art. 311 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">000004</div>
+                    <div class="autocomplete-description">Regime automotivo - projetos incentivados, observado o art. 312 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">010001</div>
+                    <div class="autocomplete-description">Operações do FGTS não realizadas pela Caixa Econômica Federal, observado o art. 212 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011001</div>
+                    <div class="autocomplete-description">Planos de assistência funerária, observado o art. 236 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011002</div>
+                    <div class="autocomplete-description">Planos de assistência à saúde, observado o art. 237 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011003</div>
+                    <div class="autocomplete-description">Intermediação de planos de assistência à saúde, observado o art. 240 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011004</div>
+                    <div class="autocomplete-description">Concursos e prognósticos, observado o art. 246 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011005</div>
+                    <div class="autocomplete-description">Planos de assistência à saúde de animais domésticos, observado o art. 243 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200001</div>
+                    <div class="autocomplete-description">Aquisições de máquinas, de aparelhos, de instrumentos, de equipamentos, de matérias-primas, de produtos intermediários e de materiais de embalagem realizadas entre empresas autorizadas a operar em zonas de processamento de exportação, observado o art. 103 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200002</div>
+                    <div class="autocomplete-description">Fornecimento ou importação de tratores, máquinas e implementos agrícolas, destinados a produtor rural não contribuinte, e de veículos de transporte de carga destinados a transportador autônomo de carga pessoa física não contribuinte, observado o art. 110 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200003</div>
+                    <div class="autocomplete-description">Vendas de produtos destinados à alimentação humana relacionados no Anexo I da Lei Complementar nº 214, de 2025, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023, observado o art. 125 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200004</div>
+                    <div class="autocomplete-description">Venda de dispositivos médicos com a especificação das respectivas classificações da NCM/SH previstas no Anexo XII da Lei Complementar nº 214, de 2025, observado o art. 144 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200005</div>
+                    <div class="autocomplete-description">Venda de dispositivos médicos com a especificação das respectivas classificações da NCM/SH previstas no Anexo IV da Lei Complementar nº 214, de 2025, quando adquiridos por órgãos da administração pública direta, autarquias e fundações públicas, observado o art. 144 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200006</div>
+                    <div class="autocomplete-description">Situação de emergência de saúde pública reconhecida pelo Poder Legislativo federal, estadual, distrital ou municipal competente, ato conjunto do Ministro da Fazenda e do Comitê Gestor do IBS poderá ser editado, a qualquer momento, para incluir dispositivos não listados no Anexo XIII da Lei Complementar nº 214, de 2025, limitada a vigência do benefício ao período e à localidade da emergência de saúde pública, observado o art. 144 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200007</div>
+                    <div class="autocomplete-description">Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência relacionados no Anexo XIV da Lei Complementar nº 214, de 2025, com a especificação das respectivas classificações da NCM/SH, observado o art. 145 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200008</div>
+                    <div class="autocomplete-description">Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência relacionados no Anexo V da Lei Complementar nº 214, de 2025, com a especificação das respectivas classificações da NCM/SH, quando adquiridos por órgãos da administração pública direta, autarquias, fundações públicas e entidades imunes, observado o art. 145 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200009</div>
+                    <div class="autocomplete-description">Fornecimento dos medicamentos relacionados no Anexo XIV da Lei Complementar nº 214, de 2025, com a especificação das respectivas classificações da NCM/SH, observado o art. 146 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200010</div>
+                    <div class="autocomplete-description">Fornecimento dos medicamentos registrados na Anvisa, quando adquiridos por órgãos da administração pública direta, autarquias, fundações públicas e entidades imunes, observado o art. 146 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="code-description" id="codigo-tributario-principal-desc" style="display: none;"></div>
+            </div>
+          
+          <div class="form-group">
+            <label for="ind-op" class="form-label">Código do Indicador da Operação</label>
+            <input type="text" id="ind-op" class="form-control">
+            <div class="helper-text">Digite o código para ver a descrição</div>
+            <div class="code-description" id="ind-op"></div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="codigo-nbs" class="form-label">Código NBS</label>
+              <input type="text" id="codigo-nbs" class="form-control">
+              <div class="helper-text">Digite o código para ver a descrição</div>
+              <div class="code-description" id="codigo-nbs-desc"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="codigo-ncm" class="form-label">Código NCM</label>
+              <input type="text" id="codigo-ncm" class="form-control">
+              <div class="helper-text">Digite o código para ver a descrição</div>
+              <div class="code-description" id="codigo-ncm-desc"></div>
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="codigo-tributario-regular" class="form-label">Código de Classificação Tributária Regular</label>
+              <div class="autocomplete-container">
+                <input type="text" id="codigo-tributario-regular" class="form-control" placeholder="Digite o código ou descrição para filtrar" wfd-id="id17">
+                <div class="autocomplete-dropdown" id="codigo-tributario-dropdown2">
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">000002</div>
+                    <div class="autocomplete-description">Exploração de via, observado o art. 11 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">000003</div>
+                    <div class="autocomplete-description">Regime automotivo - projetos incentivados, observado o art. 311 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">000004</div>
+                    <div class="autocomplete-description">Regime automotivo - projetos incentivados, observado o art. 312 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">010001</div>
+                    <div class="autocomplete-description">Operações do FGTS não realizadas pela Caixa Econômica Federal, observado o art. 212 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011001</div>
+                    <div class="autocomplete-description">Planos de assistência funerária, observado o art. 236 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011002</div>
+                    <div class="autocomplete-description">Planos de assistência à saúde, observado o art. 237 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011003</div>
+                    <div class="autocomplete-description">Intermediação de planos de assistência à saúde, observado o art. 240 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011004</div>
+                    <div class="autocomplete-description">Concursos e prognósticos, observado o art. 246 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">011005</div>
+                    <div class="autocomplete-description">Planos de assistência à saúde de animais domésticos, observado o art. 243 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200001</div>
+                    <div class="autocomplete-description">Aquisições de máquinas, de aparelhos, de instrumentos, de equipamentos, de matérias-primas, de produtos intermediários e de materiais de embalagem realizadas entre empresas autorizadas a operar em zonas de processamento de exportação, observado o art. 103 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200002</div>
+                    <div class="autocomplete-description">Fornecimento ou importação de tratores, máquinas e implementos agrícolas, destinados a produtor rural não contribuinte, e de veículos de transporte de carga destinados a transportador autônomo de carga pessoa física não contribuinte, observado o art. 110 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200003</div>
+                    <div class="autocomplete-description">Vendas de produtos destinados à alimentação humana relacionados no Anexo I da Lei Complementar nº 214, de 2025, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023, observado o art. 125 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200004</div>
+                    <div class="autocomplete-description">Venda de dispositivos médicos com a especificação das respectivas classificações da NCM/SH previstas no Anexo XII da Lei Complementar nº 214, de 2025, observado o art. 144 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200005</div>
+                    <div class="autocomplete-description">Venda de dispositivos médicos com a especificação das respectivas classificações da NCM/SH previstas no Anexo IV da Lei Complementar nº 214, de 2025, quando adquiridos por órgãos da administração pública direta, autarquias e fundações públicas, observado o art. 144 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200006</div>
+                    <div class="autocomplete-description">Situação de emergência de saúde pública reconhecida pelo Poder Legislativo federal, estadual, distrital ou municipal competente, ato conjunto do Ministro da Fazenda e do Comitê Gestor do IBS poderá ser editado, a qualquer momento, para incluir dispositivos não listados no Anexo XIII da Lei Complementar nº 214, de 2025, limitada a vigência do benefício ao período e à localidade da emergência de saúde pública, observado o art. 144 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200007</div>
+                    <div class="autocomplete-description">Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência relacionados no Anexo XIV da Lei Complementar nº 214, de 2025, com a especificação das respectivas classificações da NCM/SH, observado o art. 145 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200008</div>
+                    <div class="autocomplete-description">Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência relacionados no Anexo V da Lei Complementar nº 214, de 2025, com a especificação das respectivas classificações da NCM/SH, quando adquiridos por órgãos da administração pública direta, autarquias, fundações públicas e entidades imunes, observado o art. 145 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200009</div>
+                    <div class="autocomplete-description">Fornecimento dos medicamentos relacionados no Anexo XIV da Lei Complementar nº 214, de 2025, com a especificação das respectivas classificações da NCM/SH, observado o art. 146 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                  <div class="autocomplete-item">
+                    <div class="autocomplete-code">200010</div>
+                    <div class="autocomplete-description">Fornecimento dos medicamentos registrados na Anvisa, quando adquiridos por órgãos da administração pública direta, autarquias, fundações públicas e entidades imunes, observado o art. 146 da Lei Complementar nº 214, de 2025.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="code-description" id="codigo-tributario-principal-desc" style="display: none;"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="consumo-pessoal" class="form-label">Operação de Uso ou Consumo Pessoal</label>
+              <select id="consumo-pessoal" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="nao">Não</option>
+                <option value="sim">Sim</option>
+              </select>
+            </div>
+          </div>
+
+
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="exigibilidade-suspensa">
+                Exigibilidade Suspensa por Decisão Judicial
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="pagamento-antecipado">
+                Indicação de Pagamento Antecipado Parcelado
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Compra Governamental -->
+      <section class="form-section card" id="secao-compra-governamental">
+        <div class="form-section__header">
+          <h2>🏛️ Compra Governamental
+            <button type="button" class="toggle-section" data-target="compra-governamental-body">+</button>
+          </h2>
+        </div>
+        <div class="form-section__body card__body collapsed" id="compra-governamental-body">
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="tipo-ente" class="form-label">Tipo do Ente da Compra Governamental</label>
+              <select id="tipo-ente" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="uniao">União</option>
+                <option value="estado">Estados</option>
+                <option value="municipio">Distrito Federal</option>
+                <option value="autarquia">Municipios</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="desc-ente" class="form-label">Descrição do Ente</label>
+              <input type="text" id="desc-ente" class="form-control" wfd-id="id32">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Documentos Referenciados para dedução da base de cálculo -->
+      <section class="form-section card" id="secao-doc-ref-base-calc">
+        <div class="form-section__header">
+          <h2>📄 Documentos Referenciados para Dedução da Base de Cálculo
+            <button type="button" class="toggle-section" data-target="doc-ref-base-calc-body">+</button>
+          </h2>
+        </div>
+        <div class="form-section__body card__body collapsed" id="doc-ref-base-calc-body">
+          <h3 class="subsection-title">Identificação de documento fiscal que se encontra no Repositório Nacional</h3>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="tipo-nota-referenciada" class="form-label">Tipo de Documento Fiscal</label>
+              <select id="tipo-nota-referenciada" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="nfse">NFS-e</option>
+                <option value="nfe">NF-e</option>
+                <option value="cte">CT-e</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="desc-doc" class="form-label">Descrição do Tipo de Documento Fiscal</label>
+              <input type="text" id="desc-doc" class="form-control" wfd-id="id32">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="chave-doc" class="form-label">Chave do Documento Fiscal</label>
+            <input type="text" id="chave-doc" class="form-control" wfd-id="id32">
+          </div>
+          
+          <h3 class="subsection-title">Identificação de documento fiscal que não se encontra no Repositório Nacional</h3>
+           <div class="form-grid form-grid-2">
+             <div class="form-group">
+               <label for="codigo-municipio" class="form-label">Código do Município Emissor do Documento Fiscal</label>
+               <input type="text" id="codigo-municipio" class="form-control">
+               <div class="helper-text">Digite o código para ver município/UF</div>
+               <div class="code-description" id="codigo-municipio-desc"></div>
+             </div>
+
+            <div class="form-group">
+              <label for="desc-doc" class="form-label">Número do Documento Fiscal</label>
+              <input type="text" id="desc-doc" class="form-control" wfd-id="id32">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="chave-doc" class="form-label">Descrição do Documento Fiscal</label>
+            <input type="text" id="chave-doc" class="form-control" wfd-id="id32">
+          </div>
+          
+          <h3 class="subsection-title">Identificação de documento não fiscal</h3>
+           <div class="form-grid form-grid-2">
+             <div class="form-group">
+               <label for="ndoc" class="form-label">Número do Documento Não Fiscal</label>
+               <input type="text" id="ndoc" class="form-control" wfd-id="id32">
+             </div>
+
+            <div class="form-group">
+              <label for="desc-doc" class="form-label">Descrição do Documento Não Fiscal</label>
+              <input type="text" id="desc-doc" class="form-control" wfd-id="id32">
+            </div>
+          </div>
+          
+          <h3 class="subsection-title">Informações do Documento referenciado</h3>
+
+          <div class="form-group">
+            <label for="forn-ref-cpf-cnpj" class="form-label">CPF/CNPJ do Fornecedor</label>
+            <input type="text" id="forn-ref-cpf-cnpj" class="form-control" placeholder="000.000.000-00 ou 00.000.000/0000-00">
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="forn-ref-nif" class="form-label">NIF do Fornecedor</label>
+              <input type="text" id="forn-ref-nif" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="forn-ref-motivo-nif" class="form-label">Motivo para não informação do NIF do Fornecedor</label>
+              <select id="forn-ref-motivo-nif" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="nao-informado">Não informado na nota de origem</option>
+                <option value="dispensado">Dispensado do NIF</option>
+                <option value="nao-exigencia">Não exigência do NIF</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="forn-ref-nome" class="form-label">Nome / Razão Social do Fornecedor</label>
+            <input type="text" id="forn-ref-nome" class="form-control">
+          </div>
+          
+           <div class="form-grid form-grid-2">
+             <div class="form-group">
+               <label for="ndoc" class="form-label">Data de Emissão</label>
+               <input type="text" id="ndoc" class="form-control" wfd-id="id32" placeholder="dd/mm/aaaa">
+             </div>
+
+            <div class="form-group">
+              <label for="desc-doc" class="form-label">Data da Competência</label>
+              <input type="text" id="desc-doc" class="form-control" wfd-id="id32" placeholder="dd/mm/aaaa">
+            </div>
+          </div>
+          
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="forn-ref-motivo-nif" class="form-label">Tipo de Repasse ou Reembolso</label>
+              <select id="forn-ref-motivo-nif" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="rep-1">Repasse de remuneração por intermediação de imóveis a demais corretores envolvidos na operação</option>
+                <option value="rep-2">Repasse de valores a fornecedor relativo a fornecimento intermediado por agência de turismo</option>
+                <option value="reemb-1">Reembolso ou ressarcimento recebido por agência de propaganda e publicidade por valores pagos relativos a serviços de produção externa por conta e ordem de terceiro</option>
+                <option value="reemb-2">Reembolso ou ressarcimento recebido por agência de propaganda e publicidade por valores pagos relativos a serviços de mídia por conta e ordem de terceiro</option>
+                <option value="outros">Outros reembolsos ou ressarcimentos recebidos por valores pagos relativos a operações por conta e ordem de terceiro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="desc-doc" class="form-label">Descrição do Reembolso ou Ressarcimento</label>
+              <input type="text" id="desc-doc" class="form-control" wfd-id="id32">
+            </div>
+          </div>
+          
+            <div class="form-group">
+              <label for="desc-doc" class="form-label">Valor Utilizado para Dedução da Base de Cálculo</label>
+              <input type="text" id="desc-doc" class="form-control" wfd-id="id32">
+            </div>
+          
+          <div class="button-group">
+            <button type="button" class="btn btn--secondary btn--sm">
+              Adicionar
+            </button>
+          </div>
+          <div class="helper-text">Documentos Referenciados adicionados:</div>
+        </div>
+      </section>
+      
+      <!-- Seção Outros Documentos Referenciados -->
+      <section class="form-section card" id="secao-outros-doc-ref">
+        <div class="form-section__header">
+          <h2>📄 Outros Documentos Referenciados
+            <button type="button" class="toggle-section" data-target="outros-doc-ref-body">+</button>
+          </h2>
+        </div>
+        <div class="form-section__body card__body collapsed" id="outros-doc-ref-body">
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="tipo-nota-referenciada" class="form-label">Tipo de Nota Fiscal Referenciada</label>
+              <select id="tipo-nota-referenciada" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="nfse">Nota fiscal referenciada para emissão de nota de multa e juros</option>
+                <option value="nfts">Nota fiscal de pagamento parcelado antecipado</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="nfse-nfts" class="form-label">NFS-e / NFTS</label>
+              <select id="nfse-nfts" class="form-control">
+                <option value="">Selecione...</option>
+                <option value="nfse">NFS-e</option>
+                <option value="nfts">NFTS</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="numero-nota" class="form-label">Número de Nota</label>
+              <input type="text" id="numero-nota" class="form-control" wfd-id="id32">
+            </div>
+
+            <div class="form-group">
+              <label for="codigo-verificacao" class="form-label">Código de Verificação</label>
+              <input type="text" id="codigo-verificacao" class="form-control" wfd-id="id33">
+            </div>
+
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn--secondary btn--sm">
+              Adicionar
+            </button>
+          </div>
+          <div class="helper-text">Notas fiscais referenciadas adicionadas:</div>
+        </div>
+      </section>
+
+      <!-- Seção Cálculos -->
+      <section class="form-section card">
+        <div class="form-section__header">
+          <h2>🧮 Cálculos</h2>
+        </div>
+        <div class="form-section__body card__body">
+          <h3 class="subsection-title">Valores de Entrada</h3>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="valor-servicos" class="form-label">Valor dos Serviços Antes dos Tributos (R$)</label>
+              <input type="number" id="valor-servicos" class="form-control" step="0.01" min="0">
+            </div>
+
+            <div class="form-group">
+              <label for="valor-total" class="form-label">Valor Total da Nota (R$)</label>
+              <input type="number" id="valor-total" class="form-control" step="0.01" min="0">
+            </div>
+          </div>
+
+          <div class="form-grid form-grid-3">
+            <div class="form-group">
+              <label for="valor-multa" class="form-label">Valor de Multa (R$)</label>
+              <input type="number" id="valor-multa" class="form-control" step="0.01" min="0">
+            </div>
+
+            <div class="form-group">
+              <label for="valor-juros" class="form-label">Valor de Juros (R$)</label>
+              <input type="number" id="valor-juros" class="form-control" step="0.01" min="0">
+            </div>
+
+            <div class="form-group">
+              <label for="valor-deducoes" class="form-label">Valor das Deduções (R$)</label>
+              <input type="number" id="valor-deducoes" class="form-control" step="0.01" min="0">
+            </div>
+          </div>
+
+          <h3 class="subsection-title">Cálculo do IBS</h3>
+          <div class="calculation-results">
+            <div class="result-item">
+              <label class="result-label">Base de Cálculo do IBS:</label>
+              <span class="result-value" id="base-calculo-ibs">R$ 0,00</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Alíquota Estadual do IBS:</label>
+              <span class="result-value" id="aliquota-estadual-ibs">0,0%</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Alíquota Municipal do IBS:</label>
+              <span class="result-value" id="aliquota-municipal-ibs">0,0%</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Redução de Alíquota do IBS:</label>
+              <span class="result-value" id="reducao-aliquota-ibs">0,0%</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Alíquota Efetiva do IBS:</label>
+              <span class="result-value" id="aliquota-efetiva-ibs">0,0%</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Valor Diferido do IBS:</label>
+              <span class="result-value" id="valor-diferido-ibs">R$ 0,00</span>
+            </div>
+            <div class="result-item highlight">
+              <label class="result-label">Valor do IBS:</label>
+              <span class="result-value" id="valor-ibs">R$ 0,00</span>
+            </div>
+          </div>
+
+          <h3 class="subsection-title">Cálculo da CBS</h3>
+          <div class="calculation-results">
+            <div class="result-item">
+              <label class="result-label">Base de Cálculo da CBS:</label>
+              <span class="result-value" id="base-calculo-cbs">R$ 0,00</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Alíquota da CBS:</label>
+              <span class="result-value" id="aliquota-cbs">0,0%</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Redução de Alíquota da CBS:</label>
+              <span class="result-value" id="reducao-aliquota-cbs">0,0%</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Alíquota Efetiva da CBS:</label>
+              <span class="result-value" id="aliquota-efetiva-cbs">0,0%</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Valor Diferido da CBS:</label>
+              <span class="result-value" id="valor-diferido-cbs">R$ 0,00</span>
+            </div>
+            <div class="result-item highlight">
+              <label class="result-label">Valor da CBS:</label>
+              <span class="result-value" id="valor-cbs">R$ 0,00</span>
+            </div>
+          </div>
+
+          <h3 class="subsection-title">Cálculo do ISS</h3>
+          <div class="calculation-results">
+            <div class="result-item">
+              <label class="result-label">Base de Cálculo do ISS:</label>
+              <span class="result-value" id="base-calculo-iss">R$ 0,00</span>
+            </div>
+            <div class="result-item">
+              <label class="result-label">Alíquota Efetiva do ISS:</label>
+              <span class="result-value" id="aliquota-efetiva-iss">0,0%</span>
+            </div>
+            <div class="result-item highlight">
+              <label class="result-label">Valor do ISS Devido:</label>
+              <span class="result-value" id="valor-iss">R$ 0,00</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="form-group">
+        <label class="checkbox-label2">
+          <input type="checkbox" id="compra-governamental">
+          Marque aqui para NÃO visualizar automaticamente a NFS-e após a emissão
+        </label>
+      </div>
+
+      <!-- Botões Finais -->
+      <div class="form-actions">
+        <button type="button" class="btn btn--gray" id="btn-voltar">Voltar</button>
+        <button type="button" class="btn btn--gray" id="btn-ajuda">Ajuda</button>
+        <button type="submit" class="btn btn--gray" id="btn-emitir">Emitir</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
