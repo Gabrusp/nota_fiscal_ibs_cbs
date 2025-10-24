@@ -38,58 +38,6 @@
         </div>
       </section>
 
-      <!-- Seção Tomador -->
-      <section class="form-section card" id="secao-tomador">
-        <div class="form-section__header">
-          <h2>👤 Tomador (informações complementares)
-            <button type="button" class="toggle-section" data-target="tomador-body">+</button>
-          </h2>
-        </div>
-        <div class="form-section__body card__body collapsed" id="tomador-body">
-          <div class="form-grid form-grid-2">
-            <div class="form-group">
-              <label for="tomador-nif" class="form-label">NIF</label>
-              <input type="text" id="tomador-nif" class="form-control">
-            </div>
-
-            <div class="form-group">
-              <label for="tomador-motivo-nif" class="form-label">Motivo para não informação do NIF</label>
-              <select id="tomador-motivo-nif" class="form-control">
-                <option value="">Selecione...</option>
-                <option value="nao-informado">Não informado na nota de origem</option>
-                <option value="dispensado">Dispensado do NIF</option>
-                <option value="nao-exigencia">Não exigência do NIF</option>
-              </select>
-            </div>
-          </div>
-
-          <h3 class="subsection-title">Informações de Endereço no Exterior</h3>
-          <div class="form-grid form-grid-2">
-            <div class="form-group">
-              <label for="tomador-pais" class="form-label">País</label>
-              <input type="text" id="tomador-pais" class="form-control">
-            </div>
-
-            <div class="form-group">
-              <label for="tomador-codigo-postal" class="form-label">Código de Endereçamento Postal</label>
-              <input type="text" id="tomador-codigo-postal" class="form-control">
-            </div>
-          </div>
-
-          <div class="form-grid form-grid-2">
-            <div class="form-group">
-              <label for="tomador-cidade" class="form-label">Cidade</label>
-              <input type="text" id="tomador-cidade" class="form-control">
-            </div>
-
-            <div class="form-group">
-              <label for="tomador-estado" class="form-label">Estado / Província / Região</label>
-              <input type="text" id="tomador-estado" class="form-control">
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- Seção Destinatário -->
       <section class="form-section card">
         <div class="form-section__header">
@@ -103,6 +51,34 @@
             </label>
           </div>
 
+
+            <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar CPF/CNPJ, NIF ou motivo para não informação do NIF?</label>
+          
+          <div class="form-grid form-grid-3">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                CPF/CNPJ
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                NIF
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="endereco">
+                Motivo para não informação do NIF
+              </label>
+            </div>
+          </div>
+          
+          
+          
           <div class="form-group">
             <label for="destinatario-cpf-cnpj" class="form-label">CPF/CNPJ</label>
             <input type="text" id="destinatario-cpf-cnpj" class="form-control" placeholder="000.000.000-00 ou 00.000.000/0000-00">
@@ -136,6 +112,25 @@
               <input type="email" id="destinatario-email" class="form-control">
             </div>
           </div>
+          
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar endereço nacional ou no exterior?</label>
+          
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Endereço Nacional
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Endereço no Exterior
+              </label>
+            </div>
+          </div>
+          
           
           <h3 class="subsection-title">Informações de Endereço Nacional</h3>
           <div class="form-group">
@@ -202,6 +197,32 @@
         </div>
         <div class="form-section__body card__body">
 
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar CPF/CNPJ, NIF ou motivo para não informação do NIF?</label>
+          
+          <div class="form-grid form-grid-3">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra" disabled>
+                CPF/CNPJ
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra" disabled>
+                NIF
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="endereco" disabled>
+                Motivo para não informação do NIF
+              </label>
+            </div>
+          </div>
+          
+          
           <div class="form-group">
             <label for="adquirente-cpf-cnpj" class="form-label">CPF/CNPJ</label>
             <input type="text" id="adquirente-cpf-cnpj" class="form-control2" placeholder="000.000.000-00 ou 00.000.000/0000-00" disabled>
@@ -236,6 +257,25 @@
             </div>
           </div>
 
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar endereço nacional ou no exterior?</label>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra" disabled>
+                Endereço Nacional
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra" disabled>
+                Endereço no Exterior
+              </label>
+            </div>
+          </div>
+          
+          
           <h3 class="subsection-title">Informações de Endereço Nacional</h3>
           <div class="form-group">
             <label for="adquirente-cep" class="form-label">CEP do Domícílio Principal</label>
@@ -301,7 +341,34 @@
             <button type="button" class="toggle-section" data-target="imovel-obra-body">+</button>
           </h2>
         </div>
+        
         <div class="form-section__body card__body collapsed" id="imovel-obra-body">
+          
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar Cadastro Imobiliário Brasileiro (CIB), Código da Obra ou informações de endereço?</label>
+          
+          <div class="form-grid form-grid-3">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Cadastro Imobiliário Brasileiro (CIB)
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Código da Obra
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="endereco">
+                Informações de endereço
+              </label>
+            </div>
+          </div>
+          
           <div class="form-group">
             <label for="cib-imovel-obra" class="form-label">Cadastro Imobiliário Brasileiro (CIB)</label>
             <input type="text" id="cib-imovel-obra" class="form-control">
@@ -319,6 +386,25 @@
             </div>
           </div>
 
+          
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar endereço nacional ou no exterior?</label>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Endereço Nacional
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Endereço no Exterior
+              </label>
+            </div>
+          </div>
+          
           <h3 class="subsection-title">Informações de Endereço Nacional</h3>
           <div class="form-group">
             <label for="imovel-obra-cep" class="form-label">CEP</label>
@@ -402,6 +488,24 @@
             </div>
           </div>
 
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar endereço nacional ou no exterior?</label>
+
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Endereço Nacional
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Endereço no Exterior
+              </label>
+            </div>
+          </div>
+          
           <h3 class="subsection-title">Informações de Endereço Nacional</h3>
           <div class="form-group">
             <label for="imovel-obra-cep" class="form-label">CEP</label>
@@ -578,6 +682,26 @@
             </div>
           </div>
 
+          
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar a prestação de serviço ocorrida no país ou no exterior?</label>
+          
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                No País
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                No Exterior
+              </label>
+            </div>
+          </div>
+          
+          
                     <div class="form-grid form-grid-2">
             <div class="form-group">
               <label for="codigo-nbs" class="form-label">Código do Município da Prestação do Serviço</label>
@@ -761,6 +885,32 @@
           </h2>
         </div>
         <div class="form-section__body card__body collapsed" id="doc-ref-base-calc-body">
+          
+          <label for="destinatario-cpf-cnpj" class="form-label">Informe se o documento referenciado:</label>
+          
+          <div class="form-grid form-grid-3">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Se encontra no Repositório Nacional
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Não se encontra no Repositório Nacional
+              </label>
+            </div>
+            
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Não se trata de um documento fiscal
+              </label>
+            </div>
+          </div>
+          
           <h3 class="subsection-title">Identificação de documento fiscal que se encontra no Repositório Nacional</h3>
           <div class="form-grid form-grid-2">
             <div class="form-group">
@@ -820,6 +970,32 @@
           
           <h3 class="subsection-title">Informações do Documento referenciado</h3>
 
+          
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar CPF/CNPJ, NIF ou motivo para não informação do NIF do fornecedor do documento?</label>
+          
+          <div class="form-grid form-grid-3">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                CPF/CNPJ
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                NIF
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="endereco">
+                Motivo para não informação do NIF
+              </label>
+            </div>
+          </div>
+          
           <div class="form-group">
             <label for="forn-ref-cpf-cnpj" class="form-label">CPF/CNPJ do Fornecedor</label>
             <input type="text" id="forn-ref-cpf-cnpj" class="form-control" placeholder="000.000.000-00 ou 00.000.000/0000-00">
@@ -923,6 +1099,25 @@
         <div class="form-section__body card__body">
           <h3 class="subsection-title">Valores de Entrada</h3>
 
+          <label for="destinatario-cpf-cnpj" class="form-label">Gostaria de informar o valor dos serviços antes dos tributos ou o valor total da nota (R$)?</label>
+          
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Valor dos Serviços Antes dos Tributos
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="radio" name="informacao" value="codigo_obra">
+                Valor Total da Nota
+              </label>
+            </div>
+          </div>
+          
+          
           <div class="form-grid form-grid-2">
             <div class="form-group">
               <label for="valor-servicos" class="form-label">Valor dos Serviços Antes dos Tributos (R$)</label>
@@ -947,6 +1142,12 @@
             </div>
           </div>
 
+          <div class="button-group">
+            <button type="button" class="btn btn--secondary btn--sm">
+              Atualizar cálculos
+            </button>
+          </div>
+          
           <h3 class="subsection-title">Cálculo do IBS</h3>
           <div class="calculation-results">
             <div class="result-item">
